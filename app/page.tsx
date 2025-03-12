@@ -18,7 +18,14 @@ import {
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
+  CV,
 } from './data'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/shadcn/tooltip'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -89,7 +96,7 @@ function ProjectVideo({ src }: ProjectVideoProps) {
   )
 }
 
-function MagneticSocialLink({
+export function MagneticSocialLink({
   children,
   link,
 }: {
@@ -135,42 +142,56 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <div className="flex-1">
+        <div className="flex-1 mb-5">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Focused on creating intuitive and performant web experiences.
-            Bridging the gap between design and development.
+            Young and ambitious developer dedicated to delivering high-quality
+            products to clients and ensuring a satisfying user experience.
+            Passionate about creating intuitive, user-friendly solutions with a
+            strong focus on aesthetic design and functionality.
           </p>
         </div>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <MagneticSocialLink link={CV.link}>CV</MagneticSocialLink>
+            </TooltipTrigger>
+            <TooltipContent>
+              Updated on {CV.updated.toLocaleDateString()}
+            </TooltipContent>
+          </Tooltip>{' '}
+        </TooltipProvider>
       </motion.section>
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.map((project) => (
-            <div key={project.name} className="space-y-2">
-              <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+      {PROJECTS.length > 0 && (
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {PROJECTS.map((project) => (
+              <div key={project.name} className="space-y-2">
+                <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
+                  <ProjectVideo src={project.video} />
+                </div>
+                <div className="px-1">
+                  <a
+                    className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
+                    href={project.link}
+                    target="_blank"
+                  >
+                    {project.name}
+                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full"></span>
+                  </a>
+                  <p className="text-base text-zinc-600 dark:text-zinc-400">
+                    {project.description}
+                  </p>
+                </div>
               </div>
-              <div className="px-1">
-                <a
-                  className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
-                  href={project.link}
-                  target="_blank"
-                >
-                  {project.name}
-                  <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full"></span>
-                </a>
-                <p className="text-base text-zinc-600 dark:text-zinc-400">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.section>
+            ))}
+          </div>
+        </motion.section>
+      )}
 
       <motion.section
         variants={VARIANTS_SECTION}
@@ -210,41 +231,43 @@ export default function Personal() {
         </div>
       </motion.section>
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
-        <h3 className="mb-3 text-lg font-medium">Blog</h3>
-        <div className="flex flex-col space-y-0">
-          <AnimatedBackground
-            enableHover
-            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
-            transition={{
-              type: 'spring',
-              bounce: 0,
-              duration: 0.2,
-            }}
-          >
-            {BLOG_POSTS.map((post) => (
-              <Link
-                key={post.uid}
-                className="-mx-3 rounded-xl px-3 py-3"
-                href={post.link}
-                data-id={post.uid}
-              >
-                <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal dark:text-zinc-100">
-                    {post.title}
-                  </h4>
-                  <p className="text-zinc-500 dark:text-zinc-400">
-                    {post.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </AnimatedBackground>
-        </div>
-      </motion.section>
+      {BLOG_POSTS.length > 0 && (
+        <motion.section
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h3 className="mb-3 text-lg font-medium">Blog</h3>
+          <div className="flex flex-col space-y-0">
+            <AnimatedBackground
+              enableHover
+              className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+              transition={{
+                type: 'spring',
+                bounce: 0,
+                duration: 0.2,
+              }}
+            >
+              {BLOG_POSTS.map((post) => (
+                <Link
+                  key={post.uid}
+                  className="-mx-3 rounded-xl px-3 py-3"
+                  href={post.link}
+                  data-id={post.uid}
+                >
+                  <div className="flex flex-col space-y-1">
+                    <h4 className="font-normal dark:text-zinc-100">
+                      {post.title}
+                    </h4>
+                    <p className="text-zinc-500 dark:text-zinc-400">
+                      {post.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </AnimatedBackground>
+          </div>
+        </motion.section>
+      )}
 
       <motion.section
         variants={VARIANTS_SECTION}
