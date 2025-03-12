@@ -1,31 +1,31 @@
 'use client'
-import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
-import { Spotlight } from '@/components/ui/spotlight'
-import { Magnetic } from '@/components/ui/magnetic'
-import {
-  MorphingDialog,
-  MorphingDialogTrigger,
-  MorphingDialogContent,
-  MorphingDialogClose,
-  MorphingDialogContainer,
-} from '@/components/ui/morphing-dialog'
-import Link from 'next/link'
-import { AnimatedBackground } from '@/components/ui/animated-background'
-import {
-  PROJECTS,
-  WORK_EXPERIENCE,
-  BLOG_POSTS,
-  EMAIL,
-  SOCIAL_LINKS,
-  CV,
-} from './data'
+import { GlowEffect } from '@/components/motion-primitives/glow-effect'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/shadcn/tooltip'
+import { AnimatedBackground } from '@/components/ui/animated-background'
+import { Magnetic } from '@/components/ui/magnetic'
+import {
+  MorphingDialog,
+  MorphingDialogClose,
+  MorphingDialogContainer,
+  MorphingDialogContent,
+  MorphingDialogTrigger,
+} from '@/components/ui/morphing-dialog'
+import { XIcon } from 'lucide-react'
+import { motion } from 'motion/react'
+import Link from 'next/link'
+import {
+  BLOG_POSTS,
+  CV,
+  EMAIL,
+  PROJECTS,
+  SOCIAL_LINKS,
+  WORK_EXPERIENCE,
+} from './data'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -96,18 +96,21 @@ function ProjectVideo({ src }: ProjectVideoProps) {
   )
 }
 
-export function MagneticSocialLink({
+function MagneticSocialLink({
   children,
   link,
+  target,
 }: {
   children: React.ReactNode
   link: string
+  target?: string
 }) {
   return (
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
       <a
         href={link}
         className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+        target={target}
       >
         {children}
         <svg
@@ -153,12 +156,14 @@ export default function Personal() {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <MagneticSocialLink link={CV.link}>CV</MagneticSocialLink>
+              <MagneticSocialLink target="_blank" link={CV.link}>
+                CV
+              </MagneticSocialLink>
             </TooltipTrigger>
             <TooltipContent>
               Updated on {CV.updated.toLocaleDateString()}
             </TooltipContent>
-          </Tooltip>{' '}
+          </Tooltip>
         </TooltipProvider>
       </motion.section>
 
@@ -207,9 +212,13 @@ export default function Personal() {
               rel="noopener noreferrer"
               key={job.id}
             >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
+              <GlowEffect
+                colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
+                mode="colorShift"
+                blur="soft"
+                duration={3}
+                hover={true}
+                scale={1}
               />
               <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
                 <div className="relative flex w-full flex-row justify-between">
