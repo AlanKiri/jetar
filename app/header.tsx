@@ -7,7 +7,14 @@ export function Header() {
     <header className="mb-8 flex items-center justify-between">
       <div>
         <Link href="/" className="font-medium text-black dark:text-white">
+        <TextEffect
+          preset="fade"
+          as='p'
+          per="char"
+          delay={0.3}
+        >
           Alan Jetar
+        </TextEffect>
         </Link>
         <TextEffect
           as="p"
