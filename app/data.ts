@@ -39,17 +39,7 @@ export const CV: CvType = {
   updated: new Date('2025-03-12'),
 }
 
-export const PROJECTS: Project[] = [
-  {
-    id: 'Coming Soon',
-    link: '/',
-    name: 'Coming Soon',
-    description:
-      'Migrating projects into this portfolio requires time and effort. Stay tuned!',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA1',
-  },
-]
+export const PROJECTS: Project[] = []
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
