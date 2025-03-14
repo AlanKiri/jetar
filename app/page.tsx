@@ -136,7 +136,7 @@ function MagneticSocialLink({
 export default function Personal() {
   return (
     <motion.main
-      className="space-y-24"
+      className="space-y-12"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -147,10 +147,8 @@ export default function Personal() {
       >
         <div className="flex-1 mb-5">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Young and ambitious developer dedicated to delivering high-quality
-            products to clients and ensuring a satisfying user experience.
-            Passionate about creating intuitive, user-friendly solutions with a
-            strong focus on aesthetic design and functionality.
+            Young and ambitious developer dedicated to ensuring a satisfying user experience.
+            Passionate about creating intuitive, user-friendly solutions with a strong focus on aesthetic design and functionality. 
           </p>
         </div>
         <TooltipProvider>
@@ -291,7 +289,7 @@ export default function Personal() {
         </p>
         <div className="flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
-            <MagneticSocialLink key={link.label} link={link.link}>
+            <MagneticSocialLink key={link.label} link={link.link} target='_blank'>
               {link.label}
             </MagneticSocialLink>
           ))}
