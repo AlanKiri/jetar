@@ -147,8 +147,9 @@ export default function Personal() {
       >
         <div className="flex-1 mb-5">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Young and ambitious developer dedicated to ensuring a satisfying user experience.
-            Passionate about creating intuitive, user-friendly solutions with a strong focus on aesthetic design and functionality. 
+            Young and ambitious developer dedicated to ensuring a satisfying
+            user experience. Passionate about creating intuitive, user-friendly
+            solutions with a strong focus on aesthetic design and functionality.
           </p>
         </div>
         <TooltipProvider>
@@ -205,8 +206,7 @@ export default function Personal() {
           {WORK_EXPERIENCE.map((job) => (
             <a
               className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-              href={job.link}
-              target="_blank"
+              href={'/experience/' + job.id}
               rel="noopener noreferrer"
               key={job.id}
             >
@@ -289,7 +289,11 @@ export default function Personal() {
         </p>
         <div className="flex items-center justify-start space-x-3">
           {SOCIAL_LINKS.map((link) => (
-            <MagneticSocialLink key={link.label} link={link.link} target='_blank'>
+            <MagneticSocialLink
+              key={link.label}
+              link={link.link}
+              target="_blank"
+            >
               {link.label}
             </MagneticSocialLink>
           ))}
