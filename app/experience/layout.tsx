@@ -1,7 +1,7 @@
 'use client'
 import { TextMorph } from '@/components/ui/text-morph'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { WORK_EXPERIENCE } from '../data'
 import { usePathname } from 'next/navigation'
 import { TextEffect } from '@/components/ui/text-effect'
@@ -31,7 +31,7 @@ export default function LayoutExperiencePost({
           as="p"
           per="char"
           delay={0.6}
-          className="text-zinc-500 dark:text-zinc-400"
+          className="text-black dark:text-white"
         >
           {experience?.company!}
         </TextEffect>
@@ -41,7 +41,7 @@ export default function LayoutExperiencePost({
           as="p"
           per="char"
           delay={0.6}
-          className="text-zinc-400 dark:text-zinc-300"
+          className="text-zinc-500 dark:text-zinc-400"
         >
           {`${experience?.start!} - ${experience?.end!}`}
         </TextEffect>
