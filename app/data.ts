@@ -43,7 +43,7 @@ type SocialLink = {
 
 export const CV: CvType = {
   link: cv,
-  updated: new Date('2025-03-20'),
+  updated: new Date('2025-06-18'),
 }
 
 export const PROJECTS: Project[] = []
@@ -90,7 +90,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'NKKM',
     title: 'Programming Lecturer',
     start: '2025.01',
-    end: 'Present',
+    end: '2025.06',
     link: 'https://nkkm.lt/',
     id: 'nkkm',
     page: false,
