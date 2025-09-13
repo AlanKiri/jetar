@@ -1,4 +1,3 @@
-'use client'
 import { GlowEffect } from '@/components/motion-primitives/glow-effect'
 import {
   Tooltip,
@@ -16,7 +15,6 @@ import {
   MorphingDialogTrigger,
 } from '@/components/ui/morphing-dialog'
 import { XIcon } from 'lucide-react'
-import { motion } from 'motion/react'
 import Link from 'next/link'
 import {
   BLOG_POSTS,
@@ -25,28 +23,10 @@ import {
   PROJECTS,
   SOCIAL_LINKS,
   WORK_EXPERIENCE,
+  YEARS_OF_EXPERIENCE,
 } from './data'
 import moment from 'moment'
 import { cn } from '@/lib/utils'
-
-const VARIANTS_CONTAINER = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-}
-
-const VARIANTS_SECTION = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
-}
-
-const TRANSITION_SECTION = {
-  duration: 0.3,
-}
 
 type ProjectVideoProps = {
   src: string
@@ -137,21 +117,13 @@ function MagneticSocialLink({
 
 export default function Personal() {
   return (
-    <motion.main
-      className="space-y-12"
-      variants={VARIANTS_CONTAINER}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
+    <main className="space-y-12">
+      <section>
         <div className="flex-1 mb-5">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Young and ambitious developer dedicated to ensuring a satisfying
-            user experience. Passionate about creating intuitive, user-friendly
-            solutions with a strong focus on aesthetic design and functionality.
+            Crating best products for our clients, driven by passion and
+            dedication. My mission is to deliver reliable, secure, and seamless
+            experiences that grow with our users and their needs.
           </p>
         </div>
         <TooltipProvider>
@@ -169,13 +141,14 @@ export default function Personal() {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      </motion.section>
+
+        <span className="text-zinc-600 dark:text-zinc-500 text-xs ml-2 italic">
+          &gt; {YEARS_OF_EXPERIENCE} years of professional experience.
+        </span>
+      </section>
 
       {PROJECTS.length > 0 && (
-        <motion.section
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-        >
+        <section>
           <h3 className="mb-5 text-lg font-medium">Selected Projects</h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {PROJECTS.map((project) => (
@@ -190,7 +163,6 @@ export default function Personal() {
                     target="_blank"
                   >
                     {project.name}
-                    <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full"></span>
                   </a>
                   <p className="text-base text-zinc-600 dark:text-zinc-400">
                     {project.description}
@@ -199,13 +171,10 @@ export default function Personal() {
               </div>
             ))}
           </div>
-        </motion.section>
+        </section>
       )}
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
+      <section>
         <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => {
@@ -251,7 +220,8 @@ export default function Personal() {
                           {job.start} - {job.end}
                         </p>
                         <p className="text-zinc-600 dark:text-zinc-400">
-                          {years > 0 && `${years}yr,`}{' '}
+                          {years > 0 && `${years}yr`}
+                          {years > 0 && months > 0 && ', '}
                           {months > 0 && `${months}mos`}
                         </p>
                       </div>
@@ -280,13 +250,10 @@ export default function Personal() {
             )
           })}
         </div>
-      </motion.section>
+      </section>
 
       {BLOG_POSTS.length > 0 && (
-        <motion.section
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-        >
+        <section>
           <h3 className="mb-3 text-lg font-medium">Blog</h3>
           <div className="flex flex-col space-y-0">
             <AnimatedBackground
@@ -317,13 +284,10 @@ export default function Personal() {
               ))}
             </AnimatedBackground>
           </div>
-        </motion.section>
+        </section>
       )}
 
-      <motion.section
-        variants={VARIANTS_SECTION}
-        transition={TRANSITION_SECTION}
-      >
+      <section>
         <h3 className="mb-5 text-lg font-medium">Connect</h3>
         <p className="mb-5 text-zinc-600 dark:text-zinc-400">
           Feel free to contact me at{' '}
@@ -342,7 +306,7 @@ export default function Personal() {
             </MagneticSocialLink>
           ))}
         </div>
-      </motion.section>
-    </motion.main>
+      </section>
+    </main>
   )
 }

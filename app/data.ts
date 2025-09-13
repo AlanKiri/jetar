@@ -1,4 +1,5 @@
 import cv from '@/public/alan_jetar_cv.pdf'
+import moment from 'moment'
 
 type CvType = {
   link: string
@@ -48,11 +49,13 @@ export const CV: CvType = {
 
 export const PROJECTS: Project[] = []
 
+const PROFESSIONAL_WORK_START = '2022.09'
+
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'SeekBetter (UAB Umina)',
     title: 'Fullstack Web Developer',
-    start: '2022.09',
+    start: PROFESSIONAL_WORK_START,
     end: 'Present',
     link: 'https://www.seekbetter.eu/',
     id: 'seekbetter',
@@ -97,6 +100,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   },
 ]
 
+export const YEARS_OF_EXPERIENCE = moment().diff(
+  moment(PROFESSIONAL_WORK_START, 'YYYY.MM'),
+  'years',
+)
 export const BLOG_POSTS: BlogPost[] = []
 
 export const SOCIAL_LINKS: SocialLink[] = [

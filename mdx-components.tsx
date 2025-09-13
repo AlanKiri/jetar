@@ -1,6 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
-import { useTheme } from 'next-themes'
 import { ThemeImage } from './components/ui/theme-image'
+import { PropsWithChildren } from 'react'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -28,6 +28,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           <figcaption className="text-center">{caption}</figcaption>
         </figure>
       )
+    },
+    Indent: ({ children }: PropsWithChildren) => {
+      return <div className="ml-4">{children}</div>
     },
   }
 }

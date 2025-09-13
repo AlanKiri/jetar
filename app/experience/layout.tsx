@@ -1,10 +1,7 @@
 'use client'
-import { TextMorph } from '@/components/ui/text-morph'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
-import { useEffect, useRef, useState } from 'react'
-import { WORK_EXPERIENCE } from '../data'
+import { EMAIL, WORK_EXPERIENCE } from '../data'
 import { usePathname } from 'next/navigation'
-import { TextEffect } from '@/components/ui/text-effect'
 
 export default function LayoutExperiencePost({
   children,
@@ -26,30 +23,23 @@ export default function LayoutExperiencePost({
         }}
       />
       <div className="absolute right-4 top-20">
-        <TextEffect
-          preset="fade"
-          as="p"
-          per="char"
-          delay={0.6}
-          className="text-black dark:text-white"
-        >
-          {experience?.company!}
-        </TextEffect>
+        <h1 className="text-black dark:text-white">{experience?.company!}</h1>
 
-        <TextEffect
-          preset="fade"
-          as="p"
-          per="char"
-          delay={0.6}
-          className="text-zinc-500 dark:text-zinc-400"
-        >
+        <p className="text-zinc-500 dark:text-zinc-400">
           {`${experience?.start!} - ${experience?.end!}`}
-        </TextEffect>
+        </p>
       </div>
 
-      <main className="prose prose-gray mt-12 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
+      <main className="prose prose-gray mt-12 mb-12 prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium">
         {children}
       </main>
+      <footer>
+        Thanks for reading, if you're interested in working together contact me
+        here:{' '}
+        <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
+          {EMAIL}
+        </a>
+      </footer>
     </>
   )
 }
