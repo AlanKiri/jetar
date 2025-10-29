@@ -4,6 +4,8 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
+import { STATUS } from './data'
+import { Banner } from './banner'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -12,9 +14,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Jetar - Main Page',
-  description:
-    'Alan Jetar - young passionate web developer here to deliver best apps for you and your clients.',
+  title: 'Alan Jetar',
   authors: [{ name: 'Alan Jetar' }],
 }
 
@@ -44,6 +44,7 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="system"
         >
+          <Banner />
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-4 md:pt-20">
               <Header />

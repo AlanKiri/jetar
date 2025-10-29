@@ -6,6 +6,10 @@ type CvType = {
   updated: Date
 }
 
+type StatusType = {
+  state?: 'open'
+}
+
 type Project = {
   name: string
   description: string
@@ -45,6 +49,10 @@ type SocialLink = {
 export const CV: CvType = {
   link: cv,
   updated: new Date('2025-06-18'),
+}
+
+export const STATUS: StatusType = {
+  state: 'open',
 }
 
 export const PROJECTS: Project[] = []

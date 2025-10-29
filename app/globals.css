@@ -60,6 +60,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --hazard-stripe-size: 40px;
+  --hazard-stripe-color: oklch(1 0 0);
 }
 /*
   ---break---
@@ -97,6 +99,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --hazard-stripe-color: oklch(0.8006 0.1631 91.94);
 }
 /*
   ---break---
@@ -148,5 +151,36 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Repeating hazard pattern */
+.hazard-bg {
+  background-image: linear-gradient(
+    135deg,
+    var(--hazard-stripe-color) 25%,
+    #000 25% 50%,
+    var(--hazard-stripe-color) 50% 75%,
+    #000 75% 100%
+  );
+  background-size: var(--hazard-stripe-size) var(--hazard-stripe-size);
+  background-repeat: repeat;
+  animation: hazard-slide 2s linear infinite;
+}
+
+/* Move one full stripe width per loop for perfect alignment */
+@keyframes hazard-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: var(--hazard-stripe-size) 0;
+  }
+}
+
+/* Optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hazard-bg {
+    animation: none;
   }
 }
