@@ -3,7 +3,9 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { STATUS } from './data'
+import { toast } from 'react-toastify'
 
 const THEMES_OPTIONS = [
   {
@@ -24,16 +26,14 @@ const THEMES_OPTIONS = [
 ]
 
 function ThemeSwitch() {
-  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    setMounted(true)
+    if (STATUS.state === 'open')
+      toast.warning("Hi, i'm currently open to work!", {
+        autoClose: 10000,
+      })
   }, [])
-
-  if (!mounted) {
-    return null
-  }
 
   return (
     <AnimatedBackground

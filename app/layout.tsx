@@ -4,8 +4,7 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
-import { STATUS } from './data'
-import { Banner } from './banner'
+import { Toast } from './toast'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -44,11 +43,11 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="system"
         >
-          <Banner />
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-4 md:pt-20">
               <Header />
               {children}
+              <Toast />
             </div>
             <div className="relative mx-auto w-full max-w-screen-sm  px-4 ">
               <Footer />
