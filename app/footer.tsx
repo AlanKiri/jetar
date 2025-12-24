@@ -6,9 +6,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useRef } from 'react'
 import { SESSIONSTORAGE_KEYS, STATUS } from './data'
 import { toast } from 'react-toastify'
-import { redirect } from 'next/navigation'
 import { GlowEffect } from '@/components/motion-primitives/glow-effect'
-import { cn } from '@/lib/utils'
 
 const THEMES_OPTIONS = [
   {
@@ -41,7 +39,6 @@ function ThemeSwitch() {
         ? JSON.parse(isNotificationSeenStr)
         : null
 
-      console.log({ resolvedTheme })
       if (!isNotificationSeen)
         openToWorkToastId.current = toast(
           <>
@@ -69,7 +66,6 @@ function ThemeSwitch() {
                 SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
                 'true',
               )
-              redirect('/opentowork')
             },
             className:
               'cursor-pointer border-1 border-zinc-100 dark:border-zinc-800',
