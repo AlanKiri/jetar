@@ -22,6 +22,7 @@ import {
   EMAIL,
   PROJECTS,
   SOCIAL_LINKS,
+  STATUS,
   WORK_EXPERIENCE,
   YEARS_OF_EXPERIENCE,
 } from './data'
@@ -126,6 +127,12 @@ export default function Personal() {
             experiences that grow with our users and their needs.
           </p>
         </div>
+
+        {STATUS.state === 'open' && (
+          <div className="mb-5 text-zinc-800 underline flex gap-1 items-center dark:text-zinc-200">
+            Currently open to work!
+          </div>
+        )}
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
@@ -141,7 +148,6 @@ export default function Personal() {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-
         <span className="text-zinc-600 dark:text-zinc-500 text-xs ml-2 italic">
           &gt; {YEARS_OF_EXPERIENCE} years of professional experience.
         </span>

@@ -3,9 +3,12 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useEffect } from 'react'
-import { STATUS } from './data'
+import { useEffect, useRef } from 'react'
+import { SESSIONSTORAGE_KEYS, STATUS } from './data'
 import { toast } from 'react-toastify'
+import { redirect } from 'next/navigation'
+import { GlowEffect } from '@/components/motion-primitives/glow-effect'
+import { cn } from '@/lib/utils'
 
 const THEMES_OPTIONS = [
   {
@@ -26,18 +29,65 @@ const THEMES_OPTIONS = [
 ]
 
 function ThemeSwitch() {
-  const { theme, setTheme } = useTheme()
+  const { theme, resolvedTheme, setTheme } = useTheme()
+  const openToWorkToastId = useRef<any>(null)
 
   useEffect(() => {
-    if (STATUS.state === 'open')
-      toast.warning("Hi, i'm currently open to work!", {
-        autoClose: 10000,
-      })
+    if (STATUS.state === 'open') {
+      const isNotificationSeenStr = sessionStorage.getItem(
+        SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
+      )
+      const isNotificationSeen = isNotificationSeenStr
+        ? JSON.parse(isNotificationSeenStr)
+        : null
+
+      console.log({ resolvedTheme })
+      if (!isNotificationSeen)
+        openToWorkToastId.current = toast(
+          <>
+            <GlowEffect
+              colors={
+                resolvedTheme === 'dark'
+                  ? ['#005c54', '#024463', '#013975', '#00218c']
+                  : ['#e6fffd', '#e6f7ff', '#e6f2ff', '#e6ecff']
+              }
+              mode="colorShift"
+              blur="soft"
+              duration={3}
+              scale={1}
+            />
+            <div
+              className={'font-semibold z-10 text-zinc-500 dark:text-zinc-100'}
+            >
+              Hi, i'm currently open to work!
+            </div>
+          </>,
+          {
+            autoClose: 10000,
+            onClick: () => {
+              sessionStorage.setItem(
+                SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
+                'true',
+              )
+              redirect('/opentowork')
+            },
+            className:
+              'cursor-pointer border-1 border-zinc-100 dark:border-zinc-800',
+            type: 'info',
+            onClose: () => {
+              sessionStorage.setItem(
+                SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
+                'true',
+              )
+            },
+          },
+        )
+    }
   }, [])
 
   return (
     <AnimatedBackground
-      className="pointer-events-none rounded-lg bg-zinc-100 dark:bg-zinc-800"
+      className="pointer-events-none rounded-lg  bg-zinc-100 dark:bg-zinc-800"
       defaultValue={theme}
       transition={{
         type: 'spring',
@@ -46,6 +96,11 @@ function ThemeSwitch() {
       }}
       enableHover={false}
       onValueChange={(id) => {
+        toast.dismiss(openToWorkToastId.current)
+        sessionStorage.setItem(
+          SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
+          'true',
+        )
         setTheme(id as string)
       }}
     >
