@@ -122,16 +122,20 @@ export default function Personal() {
       <section>
         <div className="flex-1 mb-5">
           <p className="text-zinc-600 dark:text-zinc-400">
-            Crating best products for our clients, driven by passion and
-            dedication. My mission is to deliver reliable, secure, and seamless
-            experiences that grow with our users and their needs.
+            I came from full-stack web development background, but found more
+            love in infrastructure. Competent in Docker, Terraform, Ansible,
+            with solid linux foundamentals. I use AI tools such as Claude Code
+            and Codex for development and automation tasks.
           </p>
         </div>
 
         {STATUS.state === 'open' && (
-          <div className="mb-5 text-zinc-800 underline flex gap-1 items-center dark:text-zinc-200">
+          <Link
+            href="/opentowork"
+            className="mb-5 gap-1 flex gap-1 items-center text-zinc-800 underline dark:text-zinc-200"
+          >
             Currently open to work!
-          </div>
+          </Link>
         )}
         <TooltipProvider>
           <Tooltip>
@@ -193,15 +197,12 @@ export default function Personal() {
             const duration = end.diff(start, 'months')
             const years = Math.floor(duration / 12)
             const months = Math.floor(duration % 12)
-            return (
-              <a
-                className={cn(
-                  'relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30',
-                )}
-                href={job.page ? `/experience/${job.id}` : undefined}
-                rel="noopener noreferrer"
-                key={job.id}
-              >
+            const cardClass = cn(
+              'relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30',
+            )
+
+            const cardContent = (
+              <>
                 <GlowEffect
                   colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
                   mode="colorShift"
@@ -252,7 +253,21 @@ export default function Personal() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </>
+            )
+            return job.page ? (
+              <Link
+                className={cardClass}
+                href={`/experience/${job.id}`}
+                rel="noopener noreferrer"
+                key={job.id}
+              >
+                {cardContent}
+              </Link>
+            ) : (
+              <div className={cardClass} key={job.id}>
+                {cardContent}
+              </div>
             )
           })}
         </div>

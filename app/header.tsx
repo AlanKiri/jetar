@@ -30,7 +30,9 @@ export function Header() {
             </Tooltip>
           </TooltipProvider>
         </div>
-        <p className="text-zinc-500 dark:text-zinc-400">Web Developer</p>
+        <p className="text-zinc-500 dark:text-zinc-400">
+          Junior DevOps Engineer
+        </p>
       </div>
     </header>
   )
