@@ -94,7 +94,3 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ]
 
 export const EMAIL = 'alankonnect@gmail.com'
-
-export const SESSIONSTORAGE_KEYS = {
-  isOpenToWorkNotificationSeen: 'isOpenToWorkNotificationSeen',
-} as const

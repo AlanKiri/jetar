@@ -3,10 +3,6 @@ import { AnimatedBackground } from '@/components/ui/animated-background'
 import { TextLoop } from '@/components/ui/text-loop'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import { useEffect, useRef } from 'react'
-import { SESSIONSTORAGE_KEYS, STATUS } from './data'
-import { toast } from 'react-toastify'
-import { Button } from '@/components/shadcn/button'
 
 const THEMES_OPTIONS = [
   {
@@ -28,49 +24,10 @@ const THEMES_OPTIONS = [
 
 function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
-  const openToWorkToastId = useRef<number | string | null>(null)
-
-  useEffect(() => {
-    if (STATUS.state === 'open') {
-      const isNotificationSeenStr = sessionStorage.getItem(
-        SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
-      )
-      const isNotificationSeen = isNotificationSeenStr
-        ? JSON.parse(isNotificationSeenStr)
-        : null
-
-      if (!isNotificationSeen)
-        openToWorkToastId.current = toast(
-          <>
-            <div className={'font-semibold z-10  dark:text-white'}>
-              Hi, i'm currently open to work!
-            </div>
-          </>,
-          {
-            autoClose: 10000,
-            onClick: () => {
-              sessionStorage.setItem(
-                SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
-                'true',
-              )
-            },
-            className:
-              'cursor-pointer border-1 border-zinc-100 dark:border-zinc-800',
-            type: 'info',
-            onClose: () => {
-              sessionStorage.setItem(
-                SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
-                'true',
-              )
-            },
-          },
-        )
-    }
-  }, [])
 
   return (
     <AnimatedBackground
-      className="pointer-events-none rounded-lg  bg-zinc-100 dark:bg-zinc-800"
+      className="pointer-events-none rounded-lg bg-zinc-100 dark:bg-zinc-800"
       defaultValue={theme}
       transition={{
         type: 'spring',
@@ -78,28 +35,19 @@ function ThemeSwitch() {
         duration: 0.2,
       }}
       enableHover={false}
-      onValueChange={(id) => {
-        if (openToWorkToastId.current !== null) toast.dismiss(openToWorkToastId.current)
-        sessionStorage.setItem(
-          SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
-          'true',
-        )
-        setTheme(id as string)
-      }}
+      onValueChange={(id) => setTheme(id as string)}
     >
-      {THEMES_OPTIONS.map((theme) => {
-        return (
-          <button
-            key={theme.id}
-            className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
-            type="button"
-            aria-label={`Switch to ${theme.label} theme`}
-            data-id={theme.id}
-          >
-            {theme.icon}
-          </button>
-        )
-      })}
+      {THEMES_OPTIONS.map((theme) => (
+        <button
+          key={theme.id}
+          className="inline-flex h-7 w-7 items-center justify-center text-zinc-500 transition-colors duration-100 focus-visible:outline-2 data-[checked=true]:text-zinc-950 dark:text-zinc-400 dark:data-[checked=true]:text-zinc-50"
+          type="button"
+          aria-label={`Switch to ${theme.label} theme`}
+          data-id={theme.id}
+        >
+          {theme.icon}
+        </button>
+      ))}
     </AnimatedBackground>
   )
 }
