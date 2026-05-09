@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useRef } from 'react'
 import { SESSIONSTORAGE_KEYS, STATUS } from './data'
 import { toast } from 'react-toastify'
-import { GlowEffect } from '@/components/motion-primitives/glow-effect'
+import { Button } from '@/components/shadcn/button'
 
 const THEMES_OPTIONS = [
   {
@@ -27,8 +27,8 @@ const THEMES_OPTIONS = [
 ]
 
 function ThemeSwitch() {
-  const { theme, resolvedTheme, setTheme } = useTheme()
-  const openToWorkToastId = useRef<any>(null)
+  const { theme, setTheme } = useTheme()
+  const openToWorkToastId = useRef<number | string | null>(null)
 
   useEffect(() => {
     if (STATUS.state === 'open') {
@@ -42,20 +42,7 @@ function ThemeSwitch() {
       if (!isNotificationSeen)
         openToWorkToastId.current = toast(
           <>
-            <GlowEffect
-              colors={
-                resolvedTheme === 'dark'
-                  ? ['#005c54', '#024463', '#013975', '#00218c']
-                  : ['#e6fffd', '#e6f7ff', '#e6f2ff', '#e6ecff']
-              }
-              mode="colorShift"
-              blur="soft"
-              duration={3}
-              scale={1}
-            />
-            <div
-              className={'font-semibold z-10 text-zinc-500 dark:text-zinc-100'}
-            >
+            <div className={'font-semibold z-10  dark:text-white'}>
               Hi, i'm currently open to work!
             </div>
           </>,
@@ -92,7 +79,7 @@ function ThemeSwitch() {
       }}
       enableHover={false}
       onValueChange={(id) => {
-        toast.dismiss(openToWorkToastId.current)
+        if (openToWorkToastId.current !== null) toast.dismiss(openToWorkToastId.current)
         sessionStorage.setItem(
           SESSIONSTORAGE_KEYS.isOpenToWorkNotificationSeen,
           'true',
