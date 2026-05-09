@@ -4,6 +4,7 @@ import moment from 'moment'
 type CvType = {
   link: string
   updated: Date
+  cv_outdated: boolean
 }
 
 type StatusType = {
@@ -26,12 +27,6 @@ type WorkExperience = {
   link: string
   id: string
   page: boolean // Indicates if dedicated page exists.
-  tech_stack?: {
-    front_end: { id: string; label: string }[]
-    back_end: { id: string; label: string }[]
-    database: { id: string; label: string }[]
-    deployments: { id: string; label: string }[]
-  }
 }
 
 type BlogPost = {
@@ -49,6 +44,7 @@ type SocialLink = {
 export const CV: CvType = {
   link: cv,
   updated: new Date('2025-06-18'),
+  cv_outdated: true,
 }
 
 export const STATUS: StatusType = {
@@ -64,38 +60,10 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'SeekBetter (UAB Umina)',
     title: 'Fullstack Web Developer',
     start: PROFESSIONAL_WORK_START,
-    end: 'Present',
+    end: '2026.06',
     link: 'https://www.seekbetter.eu/',
     id: 'seekbetter',
     page: true,
-    tech_stack: {
-      front_end: [
-        { id: 'react', label: 'React' },
-        { id: 'mui', label: 'Material UI' },
-        { id: 'tailwind', label: 'Tailwind CSS' },
-        { id: 'redux', label: 'Redux' },
-        { id: 'tanstack', label: 'Tanstack' },
-        { id: 'framer', label: 'Framer' },
-        { id: 'i18next', label: 'I18Next' },
-        { id: 'zod', label: 'Zod' },
-      ],
-      back_end: [
-        { id: 'php', label: 'PHP' },
-        { id: 'wordpress', label: 'Wordpress' },
-        { id: 'express', label: 'Express JS' },
-        { id: 'node', label: 'Node JS' },
-        { id: 'stripe', label: 'Stripe' },
-      ],
-      database: [
-        { id: 'mysql', label: 'MySQL' },
-        { id: 'mongo', label: 'Mongo DB' },
-      ],
-      deployments: [
-        { id: 'docker', label: 'Docker' },
-        { id: 'ubuntu', label: 'Ubuntu Linux' },
-        { id: 'web_servers', label: 'Web Servers' },
-      ],
-    },
   },
   {
     company: 'NKKM',
