@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types'
 import { ThemeImage } from './components/ui/theme-image'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ComponentPropsWithoutRef } from 'react'
+import { highlight } from 'sugar-high'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -32,5 +33,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Indent: ({ children }: PropsWithChildren) => {
       return <div className="ml-4">{children}</div>
     },
+    // code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
+    //   const codeHTML = highlight(children as string)
+    //   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+    // },
   }
 }
