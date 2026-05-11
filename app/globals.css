@@ -154,33 +154,4 @@
   }
 }
 
-/* Repeating hazard pattern */
-.hazard-bg {
-  background-image: linear-gradient(
-    135deg,
-    var(--hazard-stripe-color) 25%,
-    #000 25% 50%,
-    var(--hazard-stripe-color) 50% 75%,
-    #000 75% 100%
-  );
-  background-size: var(--hazard-stripe-size) var(--hazard-stripe-size);
-  background-repeat: repeat;
-  animation: hazard-slide 2s linear infinite;
-}
-
-/* Move one full stripe width per loop for perfect alignment */
-@keyframes hazard-slide {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: var(--hazard-stripe-size) 0;
-  }
-}
-
-/* Optional: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .hazard-bg {
-    animation: none;
-  }
 }
