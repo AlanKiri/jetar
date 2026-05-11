@@ -43,8 +43,8 @@ type SocialLink = {
 
 export const CV: CvType = {
   link: cv,
-  updated: new Date('2025-06-18'),
-  cv_outdated: true,
+  updated: new Date('2026-05-11'),
+  cv_outdated: false,
 }
 
 export const STATUS: StatusType = {
